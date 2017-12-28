@@ -9,12 +9,13 @@ jobs:
         - master
     steps:
       - checkout
-      # - run:
-      #     name: "Run unit tests"
-      #     command: |
-      #       python day01_test.py
-      #       coverage run day01.py
-      #       coverage report -m
+      - run:
+          name: "Run unit tests"
+          command: |
+            pip install coverage
+            python day01_test.py
+            coverage run day01.py
+            coverage report -m
       - run:
           name: "Get the results"
           command: |
