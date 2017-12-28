@@ -1,0 +1,21 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: python:2.7.14
+    working_directory: ~/adventofcode-2015-py
+    branches:
+      only:
+        - master
+    steps:
+      - checkout
+      # - run:
+      #     name: "Run unit tests"
+      #     command: |
+      #       python day01_test.py
+      #       coverage run day01.py
+      #       coverage report -m
+      - run:
+          name: "Get the results"
+          command: |
+            python day01.py
