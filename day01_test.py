@@ -1,7 +1,7 @@
 """Day 01 unit tests"""
 
 import unittest
-from day01 import walk_through_floors
+from day01_lib import walk_through_floors
 
 class Day01TestCase(unittest.TestCase):
     """Tests for `day01.py`"""
