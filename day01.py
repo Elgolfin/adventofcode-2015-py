@@ -1,6 +1,8 @@
 """Day 01 puzzle solutions"""
 
-with open('inputs/day01.txt', 'r') as inputFile:
+import sys
+
+with open(sys.argv[1], 'r') as inputFile:
     INSTRUCTIONS = inputFile.read()
 
 def walk_through_floors(instructions):
