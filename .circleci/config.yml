@@ -20,3 +20,4 @@ jobs:
           name: "Get the results"
           command: |
             python day01.py
+            python day09.py
