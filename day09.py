@@ -1,80 +1,52 @@
-"""Day 02 puzzle solutions"""
+"""Day 09 puzzle solutions"""
 
-DISTANCES = {
-    'Faerun to Norrath': 129,
-    'Faerun to Tristram': 58,
-    'Faerun to AlphaCentauri': 13,
-    'Faerun to Arbre': 24,
-    'Faerun to Snowdin': 60,
-    'Faerun to Tambi': 71,
-    'Faerun to Straylight': 67,
-    'Norrath to Tristram': 142,
-    'Norrath to AlphaCentauri': 15,
-    'Norrath to Arbre': 135,
-    'Norrath to Snowdin': 75,
-    'Norrath to Tambi': 82,
-    'Norrath to Straylight': 54,
-    'Tristram to AlphaCentauri': 118,
-    'Tristram to Arbre': 122,
-    'Tristram to Snowdin': 103,
-    'Tristram to Tambi': 49,
-    'Tristram to Straylight': 97,
-    'AlphaCentauri to Arbre': 116,
-    'AlphaCentauri to Snowdin': 12,
-    'AlphaCentauri to Tambi': 18,
-    'AlphaCentauri to Straylight': 91,
-    'Arbre to Snowdin': 129,
-    'Arbre to Tambi': 53,
-    'Arbre to Straylight': 40,
-    'Snowdin to Tambi': 15,
-    'Snowdin to Straylight': 99,
-    'Tambi to Straylight': 70
-}
-CITIES = [
-    "Faerun",
-    "Norrath",
-    "Tristram",
-    "AlphaCentauri",
-    "Arbre",
-    "Snowdin",
-    "Tambi",
-    "Straylight"
-]
+import sys
+import helper
 
-def permute(items, low=0):
-    """Returns all permutations of a list of items"""
-    if low + 1 >= len(items):
-        yield items
-    else:
-        for perm in permute(items, low + 1):
-            yield perm
-        for k in range(low + 1, len(items)):
-            items[low], items[k] = items[k], items[low]
-            for perm in permute(items, low + 1):
-                yield perm
-            items[low], items[k] = items[k], items[low]
+def parse_input(input_data):
+    """
+    Returns an array of unique cities and a dictionary of the distances between them
+    Each line of the input data must be in the format: City1 to City2 = 123
+    """
+    lines = input_data.splitlines()
+    cities_arr = []
+    cities_dict = {}
+    distances = {}
+    for line in lines:
+        data = line.split()
+        city1, city2, dist = data[0], data[2], int(data[4])
+        distances[city1 + city2] = dist
+        distances[city2 + city1] = dist
+        if not cities_dict.has_key(city1):
+            cities_dict[city1] = True
+            cities_arr.append(city1)
+        if not cities_dict.has_key(city2):
+            cities_dict[city2] = True
+            cities_arr.append(city2)
+    return cities_arr, distances
 
-def get_distances():
-    """Returns the shortest and the longest distances"""
+def get_distances(cities, distances):
+    """Returns the shortest and the longest runs"""
     shortest_distance = 0
     longest_distance = 0
-    for i in permute(CITIES):
-        previous = ""
+    for run in helper.permute(cities):
+        previous_city = ""
         dist = 0
-        for j in i:
-            if previous != "":
-                if DISTANCES.has_key("{0} to {1}".format(previous, j)):
-                    dist += DISTANCES["{0} to {1}".format(previous, j)]
-                else:
-                    dist += DISTANCES["{1} to {0}".format(previous, j)]
-            previous = j
+        for city in run:
+            if previous_city != "":
+                dist += distances[previous_city + city]
+            previous_city = city
         if shortest_distance == 0 or dist < shortest_distance:
             shortest_distance = dist
         if dist > longest_distance:
             longest_distance = dist
     return shortest_distance, longest_distance
 
-SHORT_DIST, LONG_DIST = get_distances()
+with open(sys.argv[1], 'r') as inputFile:
+    INPUT = inputFile.read()
 
-print "Day09 --- Part One --- result is: {0}".format(SHORT_DIST)
-print "Day09 --- Part Two --- result is: {0}".format(LONG_DIST)
+CITIES, DISTANCES = parse_input(INPUT)
+SHORTEST_DIST, LONGEST_DIST = get_distances(CITIES, DISTANCES)
+
+print "Day09 --- Part One --- result is: {0}".format(SHORTEST_DIST)
+print "Day09 --- Part Two --- result is: {0}".format(LONGEST_DIST)
