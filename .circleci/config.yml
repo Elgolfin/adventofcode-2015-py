@@ -16,8 +16,12 @@ jobs:
             python day01_test.py
             coverage run day01_lib.py
             coverage report -m
+            python day13_test.py
+            coverage run day13_lib.py
+            coverage report -m
       - run:
           name: "Get the results"
           command: |
             python day01.py inputs/day01.txt
             python day09.py inputs/day09.txt
+            python day13.py inputs/day13.txt
