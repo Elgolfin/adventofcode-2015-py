@@ -25,3 +25,5 @@ jobs:
             python day01.py inputs/day01.txt
             python day09.py inputs/day09.txt
             python day13.py inputs/day13.txt
+            python day22.py 50 500 51 9 0
+            python day22.py 50 500 51 9 1
