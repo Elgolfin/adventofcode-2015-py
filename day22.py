@@ -11,5 +11,5 @@ BOSS_DAMAGE = int(sys.argv[4])
 
 PART_1 = day22_lib.get_min_mana_to_win(PLAYER_HP, PLAYER_MANA, BOSS_HP, BOSS_DAMAGE, 0)
 PART_2 = day22_lib.get_min_mana_to_win(PLAYER_HP, PLAYER_MANA, BOSS_HP, BOSS_DAMAGE, 1)
-print "Day22 --- Part One --- result is: {0}".format(PART_1)
-print "Day22 --- Part Two --- result is: {0}".format(PART_2)
+print("Day22 --- Part One --- result is: {0}".format(PART_1))
+print("Day22 --- Part Two --- result is: {0}".format(PART_2))

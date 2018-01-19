@@ -19,7 +19,7 @@ def parse_input(input_data, include_myself):
             happiness_dict[person1 + person2] = happiness
         else:
             happiness_dict[person1 + person2] = happiness * -1
-        if not people_dict.has_key(person1):
+        if not person1 in people_dict:
             people_dict[person1] = True
             people_arr.append(person1)
     if include_myself is True:

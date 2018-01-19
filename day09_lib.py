@@ -16,10 +16,10 @@ def parse_input(input_data):
         city1, city2, dist = data[0], data[2], int(data[4])
         distances[city1 + city2] = dist
         distances[city2 + city1] = dist
-        if not cities_dict.has_key(city1):
+        if not city1 in cities_dict:
             cities_dict[city1] = True
             cities_arr.append(city1)
-        if not cities_dict.has_key(city2):
+        if not city2 in cities_dict:
             cities_dict[city2] = True
             cities_arr.append(city2)
     return cities_arr, distances

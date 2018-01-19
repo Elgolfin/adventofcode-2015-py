@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: python:2.7.14
+      - image: python:3.6.4
     working_directory: ~/adventofcode-2015-py
     branches:
       only:
@@ -13,11 +13,11 @@ jobs:
           name: "Run unit tests"
           command: |
             pip install coverage
-            python day01_test.py
-            coverage run day01_lib.py
+            python -m unittest day01_test.py -v
+            coverage run day01_test.py -v
             coverage report -m
-            python day13_test.py
-            coverage run day13_lib.py
+            python -m unittest day13_test.py -v
+            coverage run day13_test.py -v
             coverage report -m
       - run:
           name: "Get the results"
