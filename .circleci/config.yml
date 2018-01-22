@@ -19,7 +19,7 @@ jobs:
             python -m unittest day13_test.py -v
             coverage run day13_test.py -v
             coverage report -m
-            python -m unittest day163_test.py -v
+            python -m unittest day16_test.py -v
             coverage run day16_test.py -v
             coverage report -m
       - run:
