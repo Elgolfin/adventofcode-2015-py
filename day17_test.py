@@ -63,7 +63,7 @@ class Day17TestCase(unittest.TestCase):
             3,
         ]
         for index, containers in enumerate(input_containers):
-            res = day17_lib.get_exact_min_combinations(input_capacities[index], containers)
+            res = day17_lib.get_exact_combinations(input_capacities[index], containers, True)
             self.assertEqual(res, expected[index])
 
 if __name__ == '__main__':

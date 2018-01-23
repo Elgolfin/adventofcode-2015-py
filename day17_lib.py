@@ -9,25 +9,11 @@ def parse_input(input_str):
     """
     return list(map(int, input_str.splitlines()))
 
-def get_exact_combinations(capacity, containers):
+def get_exact_combinations(capacity, containers, min_container_only=False):
     """
     get_exact_combinations returns how many different combinations
     of containers can exactly fit the specified capacity
-    """
-    iter_count = len(containers)
-    count = 0
-    while iter_count > 0:
-        combinations = itertools.combinations(containers, iter_count)
-        for combination in combinations:
-            if sum(combination) == capacity:
-                count = count + 1
-        iter_count = iter_count - 1
-    return count
-
-def get_exact_min_combinations(capacity, containers):
-    """
-    get_exact_min_combinations returns how many different combinations
-    of containers can exactly fit the specified capacity (with the minimum containers)
+    If min_container_only is set to True, returns the count only for the minimum containers
     """
     iter_count = len(containers)
     count_dict = {}
@@ -42,4 +28,8 @@ def get_exact_min_combinations(capacity, containers):
         if count != 0:
             count_min_containers = count
         iter_count = iter_count - 1
-    return count_min_containers
+
+    if min_container_only:
+        return count_min_containers
+    else:
+        return sum(count_dict.values())
